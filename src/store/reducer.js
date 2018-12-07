@@ -4,7 +4,9 @@ const defaultState = {
     inputValue:'',
     list:[]
 }
-
+//reducer 可以接受state，但是绝对不能改变state
+//纯函数指的是，给定固定的输入，就一定会有固定的输出，而且不会有任何副作用
+//非纯函数，给定固定的输入，没有固定的输出，如：newState.inputValue=new Date()
 export default (state=defaultState , action)=>{
     if(action.type === CHANGE_INPUT_VALUE){
         const newState=JSON.parse(JSON.stringify(state))
