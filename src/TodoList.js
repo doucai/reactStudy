@@ -1,7 +1,8 @@
 import React,{Component} from 'react'
 import store from './store'
-import {getInputChangeAction,getAddTodoItem,getDeleteTodoItem} from './store/actionCreators'
+import {getInputChangeAction,getAddTodoItem,getDeleteTodoItem,initListDataaction} from './store/actionCreators'
 import TodoListUI from './TodoListUI'
+import axios from 'axios'
 
 class TodoList extends Component{
     constructor(props){
@@ -25,6 +26,16 @@ class TodoList extends Component{
           />
         )
     }
+    //数据获取
+    componentDidMount(){
+      axios.get('https://www.easy-mock.com/mock/5ae2b3c4ab5bad29ce810a51/example/reactdemo')
+      .then((res)=>{
+        console.log(res)
+        const data=res.data
+        this.getInitListDataAction(data)
+      })
+      .catch()
+    }
 
     handleInputChange(e){
         const action=getInputChangeAction(e.target.value)
@@ -43,6 +54,11 @@ class TodoList extends Component{
     onhandleClick(index){
         const action=getDeleteTodoItem(index)
         store.dispatch(action)
+    }
+
+    getInitListDataAction(data){
+      const action=initListDataaction(data)
+      store.dispatch(action)
     }
 }
 
