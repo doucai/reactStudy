@@ -27,10 +27,10 @@ class TodoList extends Component{
     }
     //数据获取
     componentDidMount(){
+      //action本身必须是一个对象，因引入redux-thunk所以可以传入一个函数
       const action=getTodoList()
       store.dispatch(action)
     }
-   
 
     handleInputChange(e){
         const action=getInputChangeAction(e.target.value)

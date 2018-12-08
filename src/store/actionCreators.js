@@ -24,6 +24,7 @@ export const initListDataaction=(data)=>({
 
 //redux-thunk请求，
 export const getTodoList=()=>{
+    //返回的函数自动会接收dispatch方法
     return (dispatch)=>{
         axios.get('https://www.easy-mock.com/mock/5ae2b3c4ab5bad29ce810a51/example/reactdemo')
         .then((res)=>{
