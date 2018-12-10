@@ -1,5 +1,5 @@
-import {CHANGE_INPUT_VALUE,ADD_TODO_ITEM,DELETE_TODO_ITEM,INIT_LIST_DATA_ACTION} from './actionTypes'
-import axios from 'axios'
+import {GET_INIT_LIST,CHANGE_INPUT_VALUE,ADD_TODO_ITEM,DELETE_TODO_ITEM,INIT_LIST_DATA_ACTION} from './actionTypes'
+/* import axios from 'axios' */
 
 
 export const getInputChangeAction=(value)=>({
@@ -21,8 +21,10 @@ export const initListDataaction=(data)=>({
     data
 })
 
-
-//redux-thunk请求，
+export const getInitList=()=>({
+    type:GET_INIT_LIST
+})
+/* //redux-thunk中间件请求，
 export const getTodoList=()=>{
     //返回的函数自动会接收dispatch方法
     return (dispatch)=>{
@@ -34,4 +36,4 @@ export const getTodoList=()=>{
         })
         .catch()
     }
-}
+} */

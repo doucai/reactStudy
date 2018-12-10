@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import store from './store'
-import {getInputChangeAction,getAddTodoItem,getDeleteTodoItem,getTodoList} from './store/actionCreators'
+
+import {getInitList,getInputChangeAction,getAddTodoItem,getDeleteTodoItem/* ,initListDataaction *//* getTodoList */} from './store/actionCreators'
 import TodoListUI from './TodoListUI'
 
 class TodoList extends Component{
@@ -27,9 +28,14 @@ class TodoList extends Component{
     }
     //数据获取
     componentDidMount(){
-      //action本身必须是一个对象，因引入redux-thunk所以可以传入一个函数
+      /* //action本身必须是一个对象，因引入redux-thunk中间件所以可以传入一个函数
       const action=getTodoList()
+      store.dispatch(action) */
+
+    // saga
+      const action=getInitList()
       store.dispatch(action)
+      
     }
 
     handleInputChange(e){
