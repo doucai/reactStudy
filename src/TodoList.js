@@ -1,38 +1,32 @@
 import React ,{Component} from 'react'
 import {connect} from 'react-redux'
 
-
-class TodoList extends Component{
-    constructor(props){
-        super(props)
-        this.handleButtonClick=this.handleButtonClick.bind(this)
-    }
-
-    render(){
-        return (
-            <div>
-                <input 
-                value={this.props.inputValue}  
-                onChange={this.props.handleInputChange.bind(this)}
-                />
-                <button onClick={this.handleButtonClick}>提交</button>
-                <ul>
-                    <li>123</li>
-                </ul>
-            </div>
-        )
-    }
-    
-    handleButtonClick(){
-        console.log(123)
-    }
-
-   
+const TodoList = (props)=>{
+    const {inputValue,handleInputChange,handleButtonClick,list} =props;
+    return (
+        <div>
+            <input 
+            value={inputValue}  
+            onChange={handleInputChange.bind(this)}
+            />
+            <button onClick={handleButtonClick.bind(this)}>提交</button>
+            <ul>
+                {
+                list.map((item,index)=>{
+                    return (
+                        <li key={index}>{item}</li>
+                    )
+                })
+                }
+            </ul>
+        </div>
+    )
 }
 
 const mapStateToProps =(state)=>{
     return {
-        inputValue:state.inputValue
+        inputValue:state.inputValue,
+        list:state.list
     }
 }
 
@@ -40,15 +34,20 @@ const mapStateToProps =(state)=>{
 const mapDispachToProps = (dispatch)=>{
     return{
         handleInputChange(e){
-            console.log(e.target.value)
             const action ={
                 type:"change_input_value",
                 value:e.target.value
+            }
+            dispatch(action)
+        },
+        handleButtonClick(){
+            const action ={
+                type:"add_item"
             }
             dispatch(action)
         }
     }
 }
 
-//connect功能是连接,TodoList与mapStateToProps,mapDispachToProps相互关联
+//connect功能是连接,TodoList与mapStateToProps,mapDispachToProps相互关联/映射
 export default connect(mapStateToProps,mapDispachToProps)(TodoList);
